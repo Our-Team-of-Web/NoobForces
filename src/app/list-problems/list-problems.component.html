@@ -1,0 +1,181 @@
+<div class="parent-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-7 col-sm-5 tag-outer">
+        <div class="container-fluid popular-tags">
+          <div class="row tag-row">
+            <div class="col-md-3 col-sm-6 col-3 tag-div">
+              <button class="tag-btn tag-btn-dp" (click)="popularTag('dp')">
+                Dp
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-6 col-3 tag-div">
+              <button
+                class="tag-btn tag-btn-graph"
+                (click)="popularTag('graph')"
+              >
+                Graphs
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-6 col-3 tag-div">
+              <button
+                class="tag-btn tag-btn-tree"
+                (click)="popularTag('trees')"
+              >
+                Trees
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-6 col-3 tag-div">
+              <button
+                class="tag-btn tag-btn-array"
+                (click)="popularTag('array')"
+              >
+                Arrays
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 col-sm-7 your-progress-holder">
+        <div class="container-fluid">
+          <div class="row your-progress">
+            <div class="col-4 all-problem">
+              <label class="progress-header">Total Problem</label>
+              <p class="solved">{{ totalProblems }}</p>
+              <label class="progress-header">Solved</label>
+              <p class="solved">{{ solvedCount }}</p>
+            </div>
+            <div class="col-8">
+              <circle-progress
+                [percent]="percentageSolved"
+                [radius]="75"
+                [outerStrokeWidth]="8"
+                [innerStrokeWidth]="4"
+                [outerStrokeColor]="'#31f192'"
+                [innerStrokeColor]="'#ffbf4f'"
+                [animation]="true"
+                [animationDuration]="300"
+                [titleColor]="'#f7f7f7'"
+                [unitsColor]="'#f7f7f7'"
+                [subtitleColor]="'#f7f7f7'"
+              ></circle-progress>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8 problem-list-holder">
+        <h4 class="list-problems">Problems of All levels</h4>
+        <p class="underheader">Start practice from today...</p>
+        <select
+          class="select-difficulty"
+          [(ngModel)]="selectedDifficulty"
+          (ngModelChange)="onChange($event)"
+        >
+          <option *ngFor="let item of difficulty" [value]="item">
+            {{ item }}
+          </option>
+        </select>
+        <select
+          class="select-difficulty"
+          [(ngModel)]="selectedPageSize"
+          (ngModelChange)="onChange($event)"
+        >
+          <option *ngFor="let page of pageSizes" [value]="page">
+            {{ page }}
+          </option>
+        </select>
+        <select
+          class="select-difficulty"
+          [(ngModel)]="selectedTag"
+          (ngModelChange)="onChange($event)"
+        >
+          <option *ngFor="let tag of allTags" [value]="tag">
+            {{ tag }}
+          </option>
+        </select>
+        <div
+          *ngIf="problems.length <= 0 && !isLoading"
+          style="text-align: center; color: red; font-size: 1.5rem"
+        >
+          No Problem Is there!
+        </div>
+        <ul>
+          <div class="spinner-holder">
+            <sa-spinner-infinity
+              [size]="90"
+              [thickness]="92"
+              [speed]="102"
+              [enabled]="isLoading"
+              color="rgba(17, 45, 78, 1)"
+              secondaryColor="rgba(255, 191, 79, 1)"
+            ></sa-spinner-infinity>
+            <p *ngIf="isLoading">Fetching List from Server...</p>
+          </div>
+          <li *ngFor="let problem of problems">
+            <div class="row">
+              <div class="col-md-4 col-sm-4 col-4 holder">
+                <p class="problem-heading">{{ problem.problemName }}</p>
+                <span class="tags">{{ problem.tags }}</span>
+                <!-- <span class="tags">Tree</span> -->
+              </div>
+              <div class="col-md-4 col-sm-4 col-4 holder">
+                <p class="difficulty">{{ problem.difficulty }}</p>
+              </div>
+              <div class="col-md-4 col-sm-4 col-4 holder">
+                <button
+                  class="solve-btn"
+                  type="button"
+                  (click)="solveProblem(problem.id)"
+                  *ngIf="problem.solved === false"
+                >
+                  solve
+                </button>
+                <button
+                  class="solve-btn solved-question"
+                  type="button"
+                  disabled
+                  *ngIf="problem.solved"
+                >
+                  solved
+                </button>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <button [disabled]="currentPage <= 1" (click)="gotoPrevPage()">
+              Prev
+            </button>
+            <p>Page</p>
+            <input type="number" [value]="currentPage" #nextpage />
+            <p>of {{ totalPages }}</p>
+            <button
+              type="button"
+              [disabled]="currentPage >= totalPages"
+              (click)="gotoNextPage()"
+            >
+              next
+            </button>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-4 recent-activity">
+        <h4>Recent Activity</h4>
+
+        <p class="activity" *ngIf="recentActivity.length <= 0">
+          <span class="highlight">No activity is present!</span>
+        </p>
+
+        <div class="activity-holder" *ngFor="let activity of recentActivity">
+          <span class="bullet"></span>
+          <p class="activity">
+            You have <span class="highlight">{{ activity }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,143 @@
+h3 {
+  color: #f9f7f7;
+  letter-spacing: 2px;
+  border-bottom: 2px solid #112d4e;
+}
+form {
+  max-width: 350px;
+}
+p,
+label {
+  color: #dbe2ef;
+}
+img {
+  max-height: 200px;
+  max-width: 200px;
+}
+input {
+  /* font-size: 12px; */
+  background-color: #3f72af;
+  color: #fff;
+  margin-bottom: 8px;
+  border: none;
+  border-bottom: 2px solid #112d4e;
+  border-radius: 0;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #112d4e;
+  opacity: 1; /* Firefox */
+}
+input:focus,
+input:active {
+  box-shadow: none;
+  border: none;
+  color: #fff;
+  background-color: #3f72af;
+  border-bottom: 2px solid #112d4e;
+  align-items: center;
+  justify-content: center;
+}
+.label-warning {
+  color: orange;
+  font-weight: 400;
+}
+.form-holder {
+  /* font-size: 12px; */
+  padding: 5rem 0;
+  padding-top: 10rem;
+  height: 100vh;
+  background-color: #dbe2ef;
+}
+.col-md-6 {
+  padding: 2rem;
+}
+.row {
+  background-color: white;
+  max-width: 65%;
+  margin: 0rem auto;
+  border-radius: 8px;
+  box-shadow: 1px 9px 13px 2px rgb(0 0 0 / 20%);
+}
+.image-holder {
+  text-align: center;
+}
+.image-holder p {
+  color: #112d4e;
+}
+.author {
+  display: block;
+  text-align: right;
+}
+.form-outer {
+  display: flex;
+  flex-direction: row-reverse;
+  background-color: #3f72af;
+  border-radius: 8px;
+  text-align: right;
+  justify-content: center;
+}
+button {
+  margin-right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 1rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  width: 100px;
+  text-align: center;
+  text-decoration: none;
+  color: #112d4e;
+  backface-visibility: hidden;
+  border: 0.3rem solid transparent;
+  border-radius: 4px;
+  background-color: #dbe2ef;
+  border: 2px solid #112d4e;
+  box-shadow: 1px 9px 13px 2px rgb(0 0 0 / 20%);
+  transition: background-color 0.3s ease-in-out;
+}
+button:hover {
+  background-color: #112d4e;
+  color: #dbe2ef;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+button:disabled:hover {
+  background-color: #dbe2ef;
+  color: #112d4e;
+}
+@media screen and (max-width: 746px) {
+  img {
+    height: 100px;
+  }
+  .image-holder {
+    display: none;
+  }
+  .image-outer {
+    padding: 0;
+    display: none;
+  }
+  .form-holder {
+    height: 100vh;
+  }
+}
+@media screen and (max-width: 450px) {
+  img {
+    height: 100px;
+  }
+  form {
+    padding: 2rem 0.5rem;
+  }
+  .row {
+    max-width: 95%;
+    width: 95%;
+  }
+  .col-md-6 {
+    padding: 1rem;
+  }
+  .form-holder {
+    height: 100vh;
+  }
+}

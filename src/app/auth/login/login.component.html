@@ -1,0 +1,102 @@
+<div class="form-holder">
+  <div class="row">
+    <div class="col-md-6 form-outer">
+      <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="">
+          <h3>Welcome Back&nbsp;<i class="fas fa-code"></i></h3>
+          <p>Lets Continue your journey</p>
+        </div>
+
+        <div>
+          <input
+            type="email"
+            id="inputEmail"
+            class="form-control"
+            placeholder="Email address"
+            required
+            formControlName="email"
+            autofocus
+          />
+          <label for="inputEmail">Email address</label>
+          &nbsp;
+          <label
+            *ngIf="
+              loginForm.get('email').touched &&
+              loginForm.get('email').errors?.required
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+            required!
+          </label>
+          <label
+            *ngIf="
+              loginForm.get('email').touched &&
+              loginForm.get('email').errors?.email
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;Please Enter a valid
+            email
+          </label>
+        </div>
+
+        <div>
+          <input
+            type="password"
+            id="inputPassword"
+            class="form-control"
+            placeholder="Password"
+            formControlName="password"
+            required
+          />
+          <label for="inputPassword">Password</label>
+          &nbsp;
+          <label
+            *ngIf="
+              loginForm.get('password').touched &&
+              loginForm.get('password').errors?.required
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+            required!
+          </label>
+          <label
+            *ngIf="
+              loginForm.get('password').touched &&
+              loginForm.get('password').errors?.minlength?.actualLength <
+                loginForm.get('password').errors?.minlength?.requiredLength
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;Password should be
+            longer than 6 characters
+          </label>
+        </div>
+
+        <button type="submit" [disabled]="loginForm.invalid">
+          <sa-spinner-circular-split
+            [size]="14"
+            [thickness]="300"
+            [speed]="100"
+            [enabled]="isLoading"
+            color="rgba(63, 172, 57, 1)"
+            secondaryColor="rgba(24, 24, 24, 0.1)"
+          ></sa-spinner-circular-split
+          >&nbsp;Login
+        </button>
+      </form>
+    </div>
+    <div class="col-md-6 image-outer">
+      <div class="image-holder">
+        <img src="../../../assets/login.png" alt="signup image" />
+        <p>
+          “Any fool can write code that a computer can understand. Good
+          programmers write code that humans can understand.”
+          <span class="author">– Martin Fowler</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+<div class="form-holder">
+  <div class="row">
+    <div class="col-md-6 image-outer">
+      <div class="image-holder">
+        <img src="../../../assets/signup.png" alt="signup image" />
+        <p>
+          “Sometimes it pays to stay in bed on Monday, rather than spending the
+          rest of the week debugging Monday’s code.”
+          <span class="author"> – Dan Salomon</span>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6 form-outer">
+      <form class="form-signin" [formGroup]="signupForm" (ngSubmit)="signup()">
+        <div class="">
+          <h3>Welcome Coder&nbsp;<i class="fas fa-code"></i></h3>
+          <p>Join us to light up your coding career.</p>
+        </div>
+        <div>
+          <input
+            type="email"
+            id="inputName"
+            class="form-control"
+            placeholder="Name"
+            required
+            formControlName="name"
+            autofocus
+          />
+          <label for="inputName">Name</label>
+          &nbsp;
+          <label
+            *ngIf="
+              signupForm.get('name').touched && signupForm.get('name').invalid
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+            required!
+          </label>
+        </div>
+
+        <div>
+          <input
+            type="email"
+            id="inputEmail"
+            class="form-control"
+            placeholder="Email address"
+            required
+            formControlName="email"
+            autofocus
+          />
+          <label for="inputEmail">Email address</label>
+          &nbsp;
+          <label
+            *ngIf="
+              signupForm.get('email').touched &&
+              signupForm.get('email').errors?.required
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+            required!
+          </label>
+          <label
+            *ngIf="
+              signupForm.get('email').touched &&
+              signupForm.get('email').errors?.email
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;Please Enter a valid
+            email
+          </label>
+        </div>
+
+        <div>
+          <input
+            type="password"
+            id="inputPassword"
+            class="form-control"
+            placeholder="Password"
+            required
+            formControlName="password"
+          />
+          <label for="inputPassword">Password</label>
+          &nbsp;
+          <label
+            *ngIf="
+              signupForm.get('password').touched &&
+              signupForm.get('password').errors?.required
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+            required!
+          </label>
+          <label
+            *ngIf="
+              signupForm.get('password').touched &&
+              signupForm.get('password').errors?.minlength?.actualLength <
+                signupForm.get('password').errors?.minlength?.requiredLength
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;Password should be
+            longer than 6 characters
+          </label>
+        </div>
+
+        <button type="submit" [disabled]="signupForm.invalid">
+          <sa-spinner-circular-split
+            [size]="14"
+            [thickness]="300"
+            [speed]="100"
+            [enabled]="isLoading"
+            color="rgba(63, 172, 57, 1)"
+            secondaryColor="rgba(24, 24, 24, 0.1)"
+          ></sa-spinner-circular-split
+          >&nbsp;Sign in
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

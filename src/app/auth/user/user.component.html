@@ -1,0 +1,337 @@
+<div class="parent">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <div class="profile-holder">
+          <form
+            class="form-signin"
+            [formGroup]="userProfileForm"
+            (ngSubmit)="updateNameAndEmail()"
+          >
+            <div class="profile-header">
+              <h1><i class="fas fa-address-card"></i></h1>
+              <h3>Your Profile</h3>
+            </div>
+            <div class="form-control-holder">
+              <label for="inputName">Name</label>
+              <input
+                type="email"
+                id="inputName"
+                class="form-control"
+                placeholder="Name"
+                required
+                formControlName="name"
+              />
+
+              &nbsp;
+              <label
+                *ngIf="
+                  userProfileForm.get('name').touched &&
+                  userProfileForm.get('name').invalid
+                "
+                class="label-warning"
+              >
+                <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+                required!
+              </label>
+            </div>
+
+            <div class="form-control-holder">
+              <label for="inputEmail">Email address</label>
+              <input
+                type="email"
+                id="inputEmail"
+                class="form-control"
+                placeholder="Email address"
+                required
+                formControlName="email"
+              />
+
+              &nbsp;
+              <label
+                *ngIf="
+                  userProfileForm.get('email').touched &&
+                  userProfileForm.get('email').errors?.required
+                "
+                class="label-warning"
+              >
+                <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+                required!
+              </label>
+              <label
+                *ngIf="
+                  userProfileForm.get('email').touched &&
+                  userProfileForm.get('email').errors?.email
+                "
+                class="label-warning"
+              >
+                <i class="fas fa-exclamation-circle"></i>&nbsp;Please Enter a
+                valid email
+              </label>
+            </div>
+            <div class="btn-holder">
+              <button type="submit" [disabled]="userProfileForm.invalid">
+                <sa-spinner-circular-split
+                  [size]="14"
+                  [thickness]="300"
+                  [speed]="100"
+                  [enabled]="isLoadingInfo"
+                  color="rgba(63, 172, 57, 1)"
+                  secondaryColor="rgba(24, 24, 24, 0.1)"
+                ></sa-spinner-circular-split
+                >&nbsp;Update Profile Info
+              </button>
+            </div>
+          </form>
+          <div class="password-change">
+            <p class="collapse-control">
+              <button
+                class="btn password-collapse"
+                type="button"
+                data-toggle="collapse"
+                data-target="#collapseExample"
+                aria-expanded="false"
+                aria-controls="collapseExample"
+              >
+                Wanna change password?
+              </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                <div class="profile-header">
+                  <h1><i class="fas fa-key"></i></h1>
+                  <h3>Change your password</h3>
+                </div>
+                <h3></h3>
+                <form
+                  class="form-signin"
+                  [formGroup]="passwordChangeForm"
+                  (ngSubmit)="updatePassword()"
+                >
+                  <div class="form-control-holder">
+                    <label for="inputName1">Old Password</label>
+                    <input
+                      type="password"
+                      id="inputName1"
+                      class="form-control"
+                      placeholder="Old Password"
+                      required
+                      formControlName="oldPassword"
+                    />
+
+                    &nbsp;
+                    <label
+                      *ngIf="
+                        passwordChangeForm.get('oldPassword').touched &&
+                        passwordChangeForm.get('oldPassword').errors?.required
+                      "
+                      class="label-warning"
+                    >
+                      <i class="fas fa-exclamation-circle"></i>&nbsp;This field
+                      is required!
+                    </label>
+                    <label
+                      *ngIf="
+                        passwordChangeForm.get('oldPassword').touched &&
+                        passwordChangeForm.get('oldPassword').errors?.minlength
+                          ?.actualLength <
+                          passwordChangeForm.get('oldPassword').errors
+                            ?.minlength?.requiredLength
+                      "
+                      class="label-warning"
+                    >
+                      <i class="fas fa-exclamation-circle"></i>&nbsp;Password
+                      should be longer than 6 characters
+                    </label>
+                  </div>
+
+                  <div class="form-control-holder">
+                    <label for="inputEmail1">New Password</label>
+                    <input
+                      type="password"
+                      id="inputEmail1"
+                      class="form-control"
+                      placeholder="New Password"
+                      required
+                      formControlName="newPassword"
+                    />
+
+                    &nbsp;
+                    <label
+                      *ngIf="
+                        passwordChangeForm.get('newPassword').touched &&
+                        passwordChangeForm.get('newPassword').errors?.required
+                      "
+                      class="label-warning"
+                    >
+                      <i class="fas fa-exclamation-circle"></i>&nbsp;This field
+                      is required!
+                    </label>
+                    <label
+                      *ngIf="
+                        passwordChangeForm.get('newPassword').touched &&
+                        passwordChangeForm.get('newPassword').errors?.minlength
+                          ?.actualLength <
+                          passwordChangeForm.get('newPassword').errors
+                            ?.minlength?.requiredLength
+                      "
+                      class="label-warning"
+                    >
+                      <i class="fas fa-exclamation-circle"></i>&nbsp;Password
+                      should be longer than 6 characters
+                    </label>
+                  </div>
+                  <div class="btn-holder">
+                    <button
+                      type="submit"
+                      [disabled]="passwordChangeForm.invalid"
+                      (click)="updatePassword()"
+                    >
+                      <sa-spinner-circular-split
+                        [size]="14"
+                        [thickness]="300"
+                        [speed]="100"
+                        [enabled]="isLoadingPassword"
+                        color="rgba(63, 172, 57, 1)"
+                        secondaryColor="rgba(24, 24, 24, 0.1)"
+                      ></sa-spinner-circular-split
+                      >&nbsp;Update Password
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- here goes our problem lists -->
+      <div class="col-md-7">
+        <div class="accordion" id="accordionExample">
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button
+                  class="btn btn-link"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  Problems That You have Added
+                </button>
+              </h2>
+            </div>
+
+            <div
+              id="collapseOne"
+              class="collapse show"
+              aria-labelledby="headingOne"
+              data-parent="#accordionExample"
+            >
+              <div class="card-body problem-holder">
+                <div>
+                  <div class="problem-list-holder">
+                    <div
+                      *ngIf="addedProblems.length <= 0"
+                      style="text-align: center; color: red; font-size: 1.5rem"
+                    >
+                      You haven't added any problem yet!
+                    </div>
+                    <ul>
+                      <li
+                        class="single-problem"
+                        *ngFor="let problem of addedProblems"
+                      >
+                        <div class="row">
+                          <div class="col-md-4 col-sm-4 col-4 holder">
+                            <p class="problem-heading">
+                              {{ problem.name }}
+                            </p>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-4 holder">
+                            <p class="difficulty">{{ problem.tags }}</p>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-4 holder">
+                            <button
+                              class="solve-btn"
+                              type="button"
+                              (click)="editProblem(problem.id)"
+                            >
+                              Edit
+                            </button>
+
+                            <!-- upto here -->
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button
+                  class="btn btn-link collapsed"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  Problems That you have solved
+                </button>
+              </h2>
+            </div>
+            <div
+              id="collapseTwo"
+              class="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordionExample"
+            >
+              <div class="card-body solved-problems">
+                <div>
+                  <div class="problem-list-holder">
+                    <div
+                      *ngIf="solvedProblems.length <= 0"
+                      style="text-align: center; color: red; font-size: 1.5rem"
+                    >
+                      You haven't solved any problem yet!
+                    </div>
+                    <ul>
+                      <li
+                        class="single-problem"
+                        *ngFor="let problem of solvedProblems"
+                      >
+                        <div class="row">
+                          <div class="col-md-4 col-sm-4 col-4 holder">
+                            <p class="problem-heading">
+                              {{ problem.name }}
+                            </p>
+                            <span class="tags">{{ problem.tags }}</span>
+                            <!-- <span class="tags">Tree</span> -->
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-4 holder">
+                            <p class="difficulty">Solved!!!</p>
+                          </div>
+                          <div class="col-md-4 col-sm-4 col-4 holder">
+                            <button class="solve-btn" type="button">
+                              <i class="fas fa-check-circle tick"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

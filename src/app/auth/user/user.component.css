@@ -1,0 +1,212 @@
+.parent {
+  padding-top: 6rem;
+  padding-bottom: 10rem;
+  background-color: #dbe2ef;
+}
+.accordion {
+  border-radius: 8px;
+  box-shadow: 1px 9px 13px 2px rgb(0 0 0 / 20%);
+}
+.profile-header {
+  text-align: center;
+  color: #112d4e;
+}
+.col-md-5 {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  background-color: #3f72af;
+  border-radius: 8px;
+  box-shadow: 1px 9px 13px 2px rgb(0 0 0 / 20%);
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+input {
+  max-width: 300px;
+  margin: 0 auto;
+}
+label {
+  margin-bottom: 1rem;
+}
+li {
+  padding: 1rem 0;
+  background-color: #dbe2ef;
+  border-radius: 8px;
+  box-shadow: 1px 9px 13px 2px rgb(0 0 0 / 20%);
+}
+.form-control-holder {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+button {
+  margin-right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 1rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  text-align: center;
+  text-decoration: none;
+  color: #112d4e;
+  backface-visibility: hidden;
+  border: 0.3rem solid transparent;
+  border-radius: 4px;
+  background-color: #dbe2ef;
+  border: 2px solid #112d4e;
+  box-shadow: 1px 9px 13px 2px rgb(0 0 0 / 20%);
+  transition: background-color 0.3s ease-in-out;
+}
+button:hover {
+  background-color: #112d4e;
+  color: #dbe2ef;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+button:disabled:hover {
+  background-color: #dbe2ef;
+  color: #112d4e;
+}
+input {
+  border-top: none;
+  margin-bottom: 8px;
+  box-shadow: 1px 3px 13px 2px rgb(0 0 0 / 20%);
+  transition: box-shadow 0.3s ease-in-out;
+  outline: none;
+  resize: none;
+}
+input:focus,
+input:active {
+  border: none;
+  box-shadow: 1px 9px 13px 2px rgb(0 0 0 / 20%);
+}
+i {
+  box-shadow: 1px 9px 13px 2px rgb(0 0 0 / 20%);
+}
+.password-change {
+  margin-top: 3rem;
+}
+.password-collapse {
+  border: none;
+  background-color: #dbe2ef;
+  color: #112d4e;
+  background-color: #3f72af;
+  box-shadow: none;
+  padding-left: 0;
+  text-decoration: underline;
+}
+.password-collapse:hover {
+  color: #112d4e;
+  background-color: #dbe2ef;
+  background-color: #3f72af;
+  box-shadow: none;
+}
+.password-collapse:focus {
+  box-shadow: none;
+  background-color: #3f72af;
+}
+.card.card-body {
+  padding-left: 0;
+  padding-right: 0;
+  background-color: #dbe2ef;
+  border: none;
+}
+.problem-holder,
+.solved-problems {
+  height: 50vh;
+  overflow: scroll;
+}
+.fa-key {
+  box-shadow: none;
+}
+.btn-holder {
+  text-align: center;
+}
+.collapse-control {
+  width: 300px;
+  margin: 0 auto;
+}
+.tags {
+  background-color: #3f72af;
+  width: 50px;
+  color: #dbe2ef;
+  margin-right: 2px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.09rem 0.5rem;
+  border-radius: 4px;
+  box-shadow: 1px 2px 4px 2px rgb(0 0 0 / 18%);
+}
+.problem-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3f72af;
+}
+.holder {
+  text-align: center;
+}
+.difficulty {
+  background: #fff4e1;
+  color: #ffbf4f;
+  border-radius: 30px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 17px;
+  width: 100px;
+  text-align: center;
+  margin: 0 auto;
+}
+.single-problem:hover {
+  background-color: #b6c9ec;
+}
+.col-md-7 {
+  padding-right: 0;
+}
+.solved-problems {
+  background-color: #3f72af;
+}
+.solved-problems p {
+  color: #112d4e;
+}
+.tick {
+  color: green;
+}
+.cross-btn {
+  color: green;
+  box-shadow: none;
+  font-size: 1.1rem;
+}
+.cross-btn i {
+  box-shadow: none;
+}
+.close-btn:hover {
+  background-color: green;
+}
+.delete-btn:hover {
+  background-color: rgb(151, 0, 0);
+}
+.btn:active,
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+.modal-body p {
+  font-size: 1.2rem;
+}
+.label-warning {
+  color: orange;
+  font-weight: 400;
+}
+@media (max-width: 768px) {
+  .col-md-7 {
+    padding: 0;
+  }
+}

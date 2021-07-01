@@ -1,0 +1,261 @@
+<div class="form-holder">
+  <div class="backdrop" *ngIf="editMode && !isProblemLoaded">
+    <div class="loader">Loading...</div>
+  </div>
+  <div class="container-fluid">
+    <h1>Add New Problems</h1>
+    <form [formGroup]="addProblemForm" (ngSubmit)="addProblem()">
+      <div class="container">
+        <div class="row">
+          <label for="problemName">Problem Name</label>
+          <input
+            type="text"
+            id="problemName"
+            class="form-control"
+            placeholder="Alice And Bob"
+            formControlName="problemName"
+            required
+          />
+          <label
+            *ngIf="
+              !editMode &&
+              addProblemForm.get('problemName').touched &&
+              addProblemForm.get('problemName').errors?.required
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+            required!
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-md-6 left-div">
+            <label for="inputFormat">Input Format</label>
+            <textarea
+              class="form-control"
+              id="inputFormat"
+              rows="3"
+              placeholder="Enter Input Format"
+              formControlName="inputFormat"
+            ></textarea>
+            <label
+              *ngIf="
+                !editMode &&
+                addProblemForm.get('inputFormat').touched &&
+                addProblemForm.get('inputFormat').errors?.required
+              "
+              class="label-warning"
+            >
+              <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+              required!
+            </label>
+          </div>
+          <div class="col-md-6 right-div">
+            <label for="outputFormat">Output Format</label>
+            <textarea
+              class="form-control"
+              id="outputFormat"
+              rows="3"
+              placeholder="Enter output format"
+              formControlName="outputFormat"
+            ></textarea>
+            <label
+              *ngIf="
+                !editMode &&
+                addProblemForm.get('outputFormat').touched &&
+                addProblemForm.get('outputFormat').errors?.required
+              "
+              class="label-warning"
+            >
+              <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+              required!
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 left-div">
+            <label for="sampleInput">Sample Input</label>
+            <textarea
+              class="form-control"
+              id="sampleInput"
+              rows="3"
+              placeholder="Enter sample input"
+              formControlName="sampleInput"
+            ></textarea>
+            <label
+              *ngIf="
+                !editMode &&
+                addProblemForm.get('sampleInput').touched &&
+                addProblemForm.get('sampleInput').errors?.required
+              "
+              class="label-warning"
+            >
+              <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+              required!
+            </label>
+          </div>
+          <div class="col-md-6 right-div">
+            <label for="sampleOutput">Sample Output</label>
+            <textarea
+              class="form-control"
+              id="sampleOutput"
+              rows="3"
+              placeholder="Enter sample output"
+              formControlName="sampleOutput"
+            ></textarea>
+            <label
+              *ngIf="
+                !editMode &&
+                addProblemForm.get('sampleOutput').touched &&
+                addProblemForm.get('sampleOutput').errors?.required
+              "
+              class="label-warning"
+            >
+              <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+              required!
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <label for="problemDescription">Problem Description</label>
+          <textarea
+            class="form-control"
+            id="problemDescription"
+            rows="3"
+            placeholder="Enter description"
+            formControlName="problemDescription"
+          ></textarea>
+          <label
+            *ngIf="
+              !editMode &&
+              addProblemForm.get('problemDescription').touched &&
+              addProblemForm.get('problemDescription').errors?.required
+            "
+            class="label-warning"
+          >
+            <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+            required!
+          </label>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label for="difficulty">Choose Difficulty</label>
+            <select
+              class="custom-select"
+              formControlName="difficulty"
+              id="difficulty"
+            >
+              <option
+                *ngFor="let option of difficulty; index as i"
+                [selected]="option === 'easy'"
+              >
+                {{ option }}
+              </option>
+            </select>
+            <label
+              *ngIf="
+                !editMode &&
+                addProblemForm.get('difficulty').touched &&
+                addProblemForm.get('difficulty').errors?.required
+              "
+              class="label-warning"
+            >
+              <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+              required!
+            </label>
+          </div>
+          <div class="col-md-3">
+            <label for="inputTestCase">Input Testcase</label>
+            <input
+              type="file"
+              accept=".txt"
+              class="form-control-file"
+              id="inputTestCase"
+              formControlName="inputTestcase"
+              (change)="onInputFileChange($event)"
+            />
+            <label
+              *ngIf="
+                !editMode &&
+                addProblemForm.get('inputTestcase').touched &&
+                addProblemForm.get('inputTestcase').errors?.required
+              "
+              class="label-warning"
+            >
+              <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+              required!
+            </label>
+          </div>
+          <div class="col-md-3">
+            <label for="outputTestCase">Output Testcase</label>
+            <input
+              type="file"
+              accept=".txt"
+              class="form-control-file"
+              id="outputTestCase"
+              formControlName="outputTestcase"
+              (change)="onOutputFileChange($event)"
+            />
+            <label
+              *ngIf="
+                !editMode &&
+                addProblemForm.get('outputTestcase').touched &&
+                addProblemForm.get('outputTestcase').errors?.required
+              "
+              class="label-warning"
+            >
+              <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+              required!
+            </label>
+          </div>
+          <div class="col-md-3">
+            <label for="difficulty">Choose Tag</label>
+            <select
+              class="custom-select"
+              formControlName="tags"
+              id="tags"
+              (change)="onTagChange($event)"
+            >
+              <option
+                *ngFor="let tag of allTags; index as i"
+                [selected]="tag === 'all'"
+              >
+                {{ tag }}
+              </option>
+            </select>
+            <label
+              *ngIf="
+                !editMode &&
+                addProblemForm.get('tags').touched &&
+                addProblemForm.get('tags').errors?.required
+              "
+              class="label-warning"
+            >
+              <i class="fas fa-exclamation-circle"></i>&nbsp;This field is
+              required!
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col button-holder">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg btn-block"
+              [disabled]="!editMode && addProblemForm.invalid"
+            >
+              <sa-spinner-circular-split
+                [size]="14"
+                [thickness]="300"
+                [speed]="100"
+                [enabled]="isLoading"
+                color="rgba(63, 172, 57, 1)"
+                secondaryColor="rgba(24, 24, 24, 0.1)"
+              ></sa-spinner-circular-split
+              >&nbsp; Add Problem
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

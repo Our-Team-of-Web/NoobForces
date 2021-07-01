@@ -1,0 +1,186 @@
+<div class="main-container">
+  <!-- <div class="container">
+    <div class="row">
+      <div class="">Problem Name goes here</div>
+    </div>
+  </div> -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-5 question-holder">
+        <div class="backdrop" *ngIf="isLoading">
+          <div class="loader">Loading...</div>
+        </div>
+        <div class="problem-description">
+          <h4>{{ problem.problemName }}</h4>
+          <p>
+            {{ problem.problemDescription }}
+          </p>
+        </div>
+        <div class="inputFormat">
+          <label>Input Format</label>
+          <div class="holder">
+            {{ problem.inputFormat }}
+          </div>
+        </div>
+        <div class="outputFormat">
+          <label>Output Format</label>
+          <div class="holder">
+            {{ problem.outputFormat }}
+          </div>
+        </div>
+        <div class="sample-input">
+          <label>Sample Input</label>
+          <div class="holder">
+            <textarea
+              class="form-control output"
+              rows="4"
+              #sampleInput
+              aria-label="output-textarea"
+              disabled
+            ></textarea>
+          </div>
+        </div>
+        <div class="sample-output">
+          <label>Sample Output</label>
+          <div class="holder">
+            <textarea
+              class="form-control output"
+              rows="4"
+              #sampleOutput
+              aria-label="output-textarea"
+              disabled
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-7">
+        <div>
+          <div class="box">
+            <!-- for languages -->
+            <label for="selectedLanguage">Language&nbsp;</label>
+            <select
+              name="selectedLanguage"
+              id="selectedLanguage"
+              (change)="onChangeLanguage($event.target.value)"
+            >
+              <option value="c_cpp">C/Cpp</option>
+              <option value="java">Java</option>
+              <option value="python">Python</option>
+            </select>
+            <!-- font size in editor -->
+            <label for="selectedFontSize">Font Size&nbsp;</label>
+            <select
+              name="selectedFontSize"
+              id="selectedFontSize"
+              (change)="onChangeFontSize($event.target.value)"
+            >
+              <option *ngFor="let fontSize of availableFontSizes">
+                {{ fontSize + 12 }}
+              </option>
+            </select>
+            <!-- theme for editor -->
+            <label for="selectedThemes">Theme&nbsp;</label>
+            <select
+              name="selectedThemes"
+              id="selectedThemes"
+              (change)="onChangeTheme($event.target.value)"
+            >
+              <option *ngFor="let theme of themes">
+                {{ theme.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <!-- here goes our editor -->
+        <div class="code-editor" #codeEditor style="height: 500px"></div>
+        <!-- here goes out input box -->
+        <!-- here goes hout output box -->
+        <nav>
+          <h6><i class="fas fa-terminal"></i>&nbsp;Console</h6>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a
+              class="nav-link tab-link"
+              [ngClass]="{ active: isCustomInputClicked }"
+              id="nav-home-tab"
+              data-toggle="tab"
+              role="tab"
+              (click)="customInputClicked()"
+              aria-controls="nav-home"
+              aria-selected="true"
+              ><i class="fas fa-keyboard"></i>&nbsp;Custom Input</a
+            >
+            <a
+              class="nav-link tab-link"
+              [ngClass]="{ active: isOutputClicked }"
+              (click)="outputClicked()"
+              id="nav-profile-tab"
+              data-toggle="tab"
+              role="tab"
+              aria-controls="nav-profile"
+              aria-selected="false"
+              ><i class="fas fa-poll"></i>&nbsp;Output</a
+            >
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div
+            class="tab-pane fade"
+            [ngClass]="{
+              show: isCustomInputClicked,
+              active: isCustomInputClicked
+            }"
+            id="nav-home"
+            role="tabpanel"
+            aria-labelledby="nav-home-tab"
+          >
+            <textarea
+              class="form-control output"
+              rows="4"
+              aria-label="output-textarea"
+              #input
+            ></textarea>
+          </div>
+          <div
+            class="tab-pane fade"
+            [ngClass]="{ show: isOutputClicked, active: isOutputClicked }"
+            id="nav-profile"
+            role="tabpanel"
+            aria-labelledby="nav-profile-tab"
+          >
+            <textarea
+              class="form-control output"
+              rows="4"
+              #output
+              aria-label="output-textarea"
+            ></textarea>
+          </div>
+        </div>
+        <!-- here goes buttons -->
+        <div class="btn-holder">
+          <button type="button" (click)="onComplie()">
+            <sa-spinner-circular-split
+              [size]="14"
+              [thickness]="300"
+              [speed]="100"
+              [enabled]="isLoadingCompile"
+              color="rgba(63, 172, 57, 1)"
+              secondaryColor="rgba(24, 24, 24, 0.1)"
+            ></sa-spinner-circular-split
+            >&nbsp;Compile And Run
+          </button>
+          <button type="button" (click)="submitSolution()">
+            <sa-spinner-circular-split
+              [size]="14"
+              [thickness]="300"
+              [speed]="100"
+              [enabled]="isSubmitted"
+              color="rgba(63, 172, 57, 1)"
+              secondaryColor="rgba(24, 24, 24, 0.1)"
+            ></sa-spinner-circular-split
+            >&nbsp;Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
