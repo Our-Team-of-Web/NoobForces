@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://noobforces.netlify.app/execute",
+    "target": "https://api.jdoodle.com/v1/execute",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {

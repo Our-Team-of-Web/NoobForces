@@ -87,7 +87,11 @@ export class ProblemService {
       clientId: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
     };
-    return this.http.post('http://localhost:4200/api', data, this.httpOptions);
+    return this.http.post(
+      'https://noobforces.netlify.app/api',
+      data,
+      this.httpOptions
+    );
   }
   // getting single problem
   getSingleProblem(id: string) {
