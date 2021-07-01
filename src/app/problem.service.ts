@@ -88,7 +88,7 @@ export class ProblemService {
       clientSecret: CLIENT_SECRET,
     };
     return this.http.post(
-      'https://api.jdoodle.com/v1/execute',
+      'https://noobforces.netlify.app/api',
       data,
       this.httpOptions
     );
