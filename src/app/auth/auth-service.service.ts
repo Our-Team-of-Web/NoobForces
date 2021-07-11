@@ -86,7 +86,6 @@ export class AuthServiceService {
         (err: any) => {
           this.isLoading.next(false);
           this.toastr.error(err.error.err);
-          console.log('error occurs', err);
         }
       );
   }
@@ -95,9 +94,7 @@ export class AuthServiceService {
     if (data) {
       const now = +new Date();
       const expiresIn = data.expiredAt - now;
-      console.log(expiresIn);
       if (expiresIn > 0) {
-        console.log('in the auto');
         this.isAuth.next(true);
         this.isAuthenticated = true;
         this.userName = data.userName;
@@ -126,7 +123,6 @@ export class AuthServiceService {
     token: string,
     userName: string
   ) {
-    console.log('in save', expiredAt);
     localStorage.setItem('expiresIn', expiredAt.toString());
     localStorage.setItem('userId', userId);
     localStorage.setItem('token', token);
@@ -151,7 +147,6 @@ export class AuthServiceService {
     const expiredAt: number = +localStorage.getItem('expiresIn');
     const userId = localStorage.getItem('userId');
     const userName = localStorage.getItem('userName');
-    console.log('in get=', expiredAt);
 
     if (token && expiredAt) {
       return {
@@ -170,14 +165,11 @@ export class AuthServiceService {
     };
   }
   getUserAddedProblem(userId: string) {
-    console.log(userId);
-    console.log(localStorage.getItem('token'));
     const httpOptions = {
       headers: new HttpHeaders({
         'auth-token': localStorage.getItem('token'),
       }),
     };
-    console.log(httpOptions);
     return this.http.get(`${this.baseUrl}users/added/${userId}`, httpOptions);
   }
   getUserSolvedProblem(userId: string) {
@@ -186,7 +178,6 @@ export class AuthServiceService {
         'auth-token': localStorage.getItem('token'),
       }),
     };
-    console.log(httpOptions);
     return this.http.get(`${this.baseUrl}users/solved/${userId}`, httpOptions);
   }
   updateUserInfo(name: string, email: string) {

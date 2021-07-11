@@ -62,7 +62,6 @@ export class ListProblemsComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.problemService.getUpdatedProblems.subscribe(
         (res: { problems: IProblem[]; count: number }) => {
-          console.log(res);
           this.isLoading = false;
           this.problems = res.problems;
           this.problems.forEach((problem) => {
@@ -76,9 +75,14 @@ export class ListProblemsComponent implements OnInit, OnDestroy {
               .getUserSolvedProblem(userId)
               .subscribe((response: any) => {
                 if (response.status === 'success') {
-                  this.solvedCount = response.problems.length;
-                  this.percentageSolved =
-                    (response.problems.length / res.count) * 100;
+                  let s = new Set();
+                  response.problems.forEach((element) => {
+                    const elem = JSON.stringify(element);
+                    s.add(elem);
+                  });
+
+                  this.solvedCount = s.size;
+                  this.percentageSolved = (this.solvedCount / res.count) * 100;
                   for (let solve of response.problems) {
                     const id = solve.id;
                     for (let problem of this.problems) {

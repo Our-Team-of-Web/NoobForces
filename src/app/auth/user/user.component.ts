@@ -24,7 +24,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public userProfileForm: FormGroup;
   public passwordChangeForm: FormGroup;
   public addedProblems: { id: string; name: string; tags: string }[] = [];
-  public solvedProblems: IProblem[] = [
+  public solvedProblems = [
     {
       id: '60d97b6c1bf5ab00152bb5bf',
       problemName: 'newProblem',
@@ -95,12 +95,10 @@ export class UserComponent implements OnInit, OnDestroy {
   }
   private getUserData() {
     const userId = localStorage.getItem('userId');
-    console.log(userId);
     this.subs.add(
       this.authService.getUserAddedProblem(userId).subscribe(
         (res: any) => {
           // this.addedProblems =
-          console.log(res);
           if (res.status === 'success') {
             this.addedProblems = res.problems;
           }
@@ -111,9 +109,19 @@ export class UserComponent implements OnInit, OnDestroy {
       ),
       this.authService.getUserSolvedProblem(userId).subscribe(
         (res: any) => {
-          console.log(res);
+          let s = new Set();
+          res.problems.forEach((element) => {
+            const elem = JSON.stringify(element);
+            s.add(elem);
+          });
+
           if (res.status === 'success') {
-            this.solvedProblems = res.problems;
+            const solvedByUser = [];
+            const solved: any = Array.from(s);
+            solved.forEach((element: any) => {
+              solvedByUser.push(JSON.parse(element));
+            });
+            this.solvedProblems = solvedByUser;
           }
         },
         (err) => {
@@ -139,31 +147,7 @@ export class UserComponent implements OnInit, OnDestroy {
     });
   }
   editProblem(problemId: string) {
-    console.log(problemId);
     this.router.navigate(['/edit', problemId]);
-  }
-  deleteProblemComponent(problemId: string) {
-    console.log(problemId);
-    /*
-    this.subs.add(
-      this.problemService.deleteProblem(problemId).subscribe(
-        (res) => {
-          const updatedArray = this.addedProblems.filter((problem) => {
-            if (problem.id !== problemId) {
-              return true;
-            } else {
-              return false;
-            }
-          });
-          this.addedProblems = updatedArray;
-          this.isDeleted = true;
-          this.toastr.success('Problem Deleted Successfully');
-        },
-        (err) => {
-          this.toastr.error('Error', err.error.err);
-        }
-      )
-    );*/
   }
   ngOnDestroy() {
     this.subs.unsubscribe();

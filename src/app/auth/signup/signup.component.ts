@@ -48,7 +48,6 @@ export class SignupComponent implements OnInit {
         if (err) {
           this.isLoading = false;
           this.toastr.error('Failed', err.error.err);
-          console.log(err.error.err);
         }
       }
     );

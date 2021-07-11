@@ -65,7 +65,6 @@ export class ProblemService {
     }),
   };
   public updateRecentActivity(activity: string) {
-    console.log('control is here');
     if (this.recentActivityArray.length < 5) {
       this.recentActivityArray.push(activity);
     } else {
@@ -77,18 +76,14 @@ export class ProblemService {
     return [...this.recentActivityArray];
   }
   compileAndRun(script: string, language: string, input: string) {
-    console.log(language);
-    console.log(script);
     const data = {
       script: script,
       language,
-      stdin: input,
+      input: input,
       versionIndex: '3',
-      clientId: CLIENT_ID,
-      clientSecret: CLIENT_SECRET,
     };
     return this.http.post(
-      'https://noobforces.netlify.app/api',
+      'https://noobforces-backend.herokuapp.com/problems/test',
       data,
       this.httpOptions
     );
@@ -171,7 +166,6 @@ export class ProblemService {
     payload.append('inputFormat', problem.inputFormat);
     payload.append('outputFormat', problem.outputFormat);
 
-    console.log(localStorage.getItem('token'));
     return this.http.post(
       `https://noobforces-backend.herokuapp.com/problems`,
       payload,

@@ -103,10 +103,9 @@ export class ViewProblemComponent
     this.init();
   }
   private init() {
-    console.log('initialized');
     ace.require('ace/ext/language_tools');
     const editorOptions = this.getEditorOptions();
-    console.log(this.codeEditorElmRef);
+
     const element = this.codeEditorElmRef.nativeElement;
 
     this.codeEditor = ace.edit(element, editorOptions);
@@ -119,7 +118,6 @@ export class ViewProblemComponent
       this.problemService
         .getSingleProblem(this.problemId)
         .subscribe((res: any) => {
-          console.log(res);
           if (res.status === 'success') {
             this.isLoading = false;
             this.problem = {
@@ -133,9 +131,6 @@ export class ViewProblemComponent
               inputFormat: res.problem.inputFormat,
               outputFormat: res.problem.outputFormat,
             };
-
-            console.log('here goes our id = ', this.problemId);
-            console.log(this.problem);
 
             this.sampleInput.nativeElement.value = this.problem.sampleInput;
             this.sampleOutput.nativeElement.value = this.problem.sampleOutput;
@@ -170,7 +165,7 @@ export class ViewProblemComponent
   onChangeLanguage(selectedLanguage) {
     const language = this.languages[selectedLanguage].aceEditor;
     this.selectedLanguage = this.languages[selectedLanguage].jdoodle;
-    console.log(this.languages[selectedLanguage]);
+
     this.codeEditor.getSession().setMode(language);
   }
   onChangeFontSize(fontSize) {
@@ -187,7 +182,7 @@ export class ViewProblemComponent
     const input = this.progarmInput.nativeElement.value;
     let words = this.codeEditor.getSession().getValue();
     // words = words.split('\n').join('\\n');
-    console.log(words);
+
     if (input && words) {
       this.isLoadingCompile = true;
       this.problemService

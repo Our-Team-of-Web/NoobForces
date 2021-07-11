@@ -36,7 +36,6 @@ export class AddProblemComponent implements OnInit, OnDestroy {
     this.initForm();
     this.route.paramMap.subscribe((params) => {
       const id = params.get('id');
-      console.log(id);
       if (id) {
         this.editMode = true;
         this.problemId = id;
@@ -60,7 +59,6 @@ export class AddProblemComponent implements OnInit, OnDestroy {
             }
           },
           (err) => {
-            console.log(err);
             this.toastr.error(err.error.err, 'Error');
             this.router.navigate(['/userprofile']);
           }
@@ -71,7 +69,6 @@ export class AddProblemComponent implements OnInit, OnDestroy {
     });
   }
   private populateForm(problem: IProblem) {
-    console.log(problem);
     this.addProblemForm.patchValue({ problemName: problem.problemName });
     this.addProblemForm.patchValue({
       problemDescription: problem.problemDescription,
